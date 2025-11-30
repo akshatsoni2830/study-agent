@@ -1,0 +1,14 @@
+.study-agent-floating-btn{position:fixed;right:16px;bottom:16px;z-index:2147483647;background:#2563eb;color:#fff;border:none;border-radius:9999px;padding:10px 14px;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.2);cursor:pointer}
+.study-agent-floating-btn:hover{background:#1e40af}
+.study-agent-popup-wrap{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:2147483646;display:flex;align-items:center;justify-content:center}
+.study-agent-popup{width:360px;background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.25);overflow:hidden;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
+.sap-header{font-weight:600;padding:12px 16px;background:#111827;color:#f9fafb}
+.sap-body{padding:14px 16px}
+.sap-body label{display:block;margin:8px 0;color:#111827;font-size:14px}
+.sap-body input{width:100%;padding:8px 10px;border:1px solid #d1d5db;border-radius:8px;margin-top:4px}
+.sap-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.sap-btn-primary{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:8px 12px;cursor:pointer}
+.sap-btn-primary:hover{background:#1e40af}
+.sap-btn-outline{background:#fff;color:#111827;border:1px solid #d1d5db;border-radius:8px;padding:8px 12px;cursor:pointer}
+.study-agent-toast{position:fixed;top:16px;right:16px;background:#111827;color:#fff;padding:10px 12px;border-radius:8px;z-index:2147483647;box-shadow:0 6px 18px rgba(0,0,0,.2)}
+#sap-status{margin-top:12px;font-size:13px;color:#111827}

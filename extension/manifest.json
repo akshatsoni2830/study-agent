@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "Study Agent for Drive",
+  "version": "1.0.0",
+  "description": "Add a button on Google Drive folders to summarize with Study Agent backend.",
+  "action": {
+    "default_title": "Study Agent"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": [
+    "http://127.0.0.1:8000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://drive.google.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_end"
+    }
+  ]
+}
