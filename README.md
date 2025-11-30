@@ -75,6 +75,20 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+### Quick Start (one command)
+
+On Windows (PowerShell):
+```
+scripts\setup.ps1
+scripts\run_cli.ps1
+```
+
+On macOS/Linux:
+```
+chmod +x scripts/*.sh
+scripts/run_cli.sh
+```
+
 ## 7) Run the app
 
 There are two ways to use Study Agent now:
@@ -92,6 +106,8 @@ On first run, you'll authenticate with Google. Then you'll be asked to:
 The CLI supports both raw folder IDs and full Drive URLs. You can set:
 - `ROOT_STUDY_FOLDER_ID` or `ROOT_STUDY_FOLDER_URL` in `.env` to preselect the root.
 The summary is saved to `output/<subject>/<semester?>/<folder>/<YYYYMMDD_HHMMSS>/summary.md`.
+
+Note: `.env.example` is committed and safe to share. Your real `.env` (with secrets) is ignored by git.
 
 ### B) FastAPI server
 Start the API server:
