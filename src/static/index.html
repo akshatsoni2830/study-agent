@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Ever Study Agent</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-graduation-cap"></i> Best Ever Study Agent</h1>
+            <p>Summarize, Quiz, Flashcards, and Chat with your study materials.</p>
+        </header>
+
+        <main>
+            <section id="setup-section" class="card">
+                <h2>1. Setup Study Material</h2>
+                <div class="form-group">
+                    <label for="folderId">Drive Folder ID or URL</label>
+                    <input type="text" id="folderId" placeholder="Paste Google Drive Folder Link or ID">
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="subjectName">Subject Name</label>
+                        <input type="text" id="subjectName" placeholder="e.g. Data Structures">
+                    </div>
+                    <div class="form-group">
+                        <label for="semester">Semester (Optional)</label>
+                        <input type="text" id="semester" placeholder="e.g. Sem 3">
+                    </div>
+                </div>
+                <button id="btnSummarize" class="btn-primary">
+                    <i class="fas fa-magic"></i> Summarize Folder
+                </button>
+                <div id="summarizeStatus" class="status-msg"></div>
+            </section>
+
+            <section id="tools-section" class="card hidden">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="summary">Summary</button>
+                    <button class="tab-btn" data-tab="quiz">Quiz</button>
+                    <button class="tab-btn" data-tab="flashcards">Flashcards</button>
+                    <button class="tab-btn" data-tab="chat">Chat</button>
+                </div>
+
+                <div id="tab-summary" class="tab-content active">
+                    <div class="actions">
+                        <a id="downloadLink" href="#" target="_blank" class="btn-secondary">
+                            <i class="fas fa-download"></i> Open Markdown File
+                        </a>
+                    </div>
+                    <div id="summaryContent" class="markdown-body"></div>
+                </div>
+
+                <div id="tab-quiz" class="tab-content">
+                    <div class="actions">
+                        <button id="btnGenerateQuiz" class="btn-secondary">
+                            <i class="fas fa-question-circle"></i> Generate New Quiz
+                        </button>
+                    </div>
+                    <div id="quizContainer"></div>
+                </div>
+
+                <div id="tab-flashcards" class="tab-content">
+                     <div class="actions">
+                        <button id="btnGenerateFlashcards" class="btn-secondary">
+                            <i class="fas fa-clone"></i> Generate Flashcards
+                        </button>
+                    </div>
+                    <div id="flashcardsContainer" class="flashcards-grid"></div>
+                </div>
+
+                <div id="tab-chat" class="tab-content">
+                    <div class="chat-container">
+                        <div id="chatHistory" class="chat-history"></div>
+                        <div class="chat-input-area">
+                            <input type="text" id="chatInput" placeholder="Ask a question about your documents...">
+                            <button id="btnSendChat" class="btn-primary"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

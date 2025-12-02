@@ -28,6 +28,15 @@ class SummarizeFolderRequest(BaseModel):
     semester: Optional[str] = Field(None, description="Optional semester label")
 
 
+class GenerateRequest(BaseModel):
+    summary_file: str = Field(..., description="Path to the summary file (relative to output root)")
+
+
+class ChatRequest(BaseModel):
+    summary_file: str = Field(..., description="Path to the summary file (relative to output root)")
+    question: str = Field(..., description="Question to ask")
+
+
 defaults = get_defaults()
 OUTPUT_DIR: Path = defaults["output_dir"]  # type: ignore[assignment]
 ensure_dir(OUTPUT_DIR)
@@ -134,3 +143,44 @@ async def summarize_folder(req: SummarizeFolderRequest):
         "summary_url": f"/output/{out_name}",
         "errors": errors,
     }
+
+
+def _read_summary_content(relative_path: str) -> str:
+    # Security check: prevent traversal
+    safe_path = OUTPUT_DIR / relative_path
+    try:
+        safe_path = safe_path.resolve()
+        if not str(safe_path).startswith(str(OUTPUT_DIR.resolve())):
+            raise ValueError("Path traversal detected")
+        if not safe_path.exists():
+            raise FileNotFoundError("Summary file not found")
+        return safe_path.read_text(encoding="utf-8")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.post("/generate-quiz")
+async def generate_quiz(req: GenerateRequest):
+    text = _read_summary_content(req.summary_file)
+    gemini = GeminiClient()
+    quiz = gemini.generate_quiz(text)
+    return {"quiz": quiz}
+
+
+@app.post("/generate-flashcards")
+async def generate_flashcards(req: GenerateRequest):
+    text = _read_summary_content(req.summary_file)
+    gemini = GeminiClient()
+    cards = gemini.generate_flashcards(text)
+    return {"flashcards": cards}
+
+
+@app.post("/chat")
+async def chat(req: ChatRequest):
+    text = _read_summary_content(req.summary_file)
+    gemini = GeminiClient()
+    answer = gemini.chat_with_content(text, req.question)
+    return {"answer": answer}
+
+
+app.mount("/", StaticFiles(directory="src/static", html=True), name="static")
